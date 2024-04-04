@@ -1,0 +1,131 @@
+CODIFICACION DE BANCO MEXICANO PARTE 2
+CODIFICACION DE CONEXION, OPCIONES DE DEPOSITO, RETIRO Y CONSULTA DE SALDO......
+
+
+
+Codificacion conexion 
+
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager; 
+
+public class Conexion {
+    public Connection getConnection(){
+        Connection con = null;
+        String base = "bdbancomexicano";
+        String url = "jdbc:mysql://localhost:3306/" + base;
+        String user = "root";
+        String password = "";
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection(url, user, password);
+        } catch(Exception e){
+            System.err.println(e);
+        }
+                return con;
+        
+    }
+}
+
+
+codificacion deposito:
+
+import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+  
+        Connection con;   
+        Conexion conn = new Conexion();
+        
+        try{
+            con = conn.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE cuenta SET saldo=saldo + ? WHERE id=1");
+            ps.setString(1, jtfCantidad.getText());
+            
+            int res = ps.executeUpdate();
+            
+            if(res > 0){
+                JOptionPane.showMessageDialog(null, "Deposito exitoso");               
+            }  else{
+                JOptionPane.showMessageDialog(null, "Error al Depositar");
+            }      
+            
+            jtfCantidad.setText("");
+            
+            con.close();
+        } catch(Exception e){
+          System.err.println(e);
+        }
+        
+        
+    }  
+
+
+codificacion Retiro
+
+import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
+             Connection con;   
+        Conexion conn = new Conexion();
+        
+        try{
+            con = conn.getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE cuenta SET saldo=saldo - ? WHERE id=1");
+            ps.setString(1, jtfMonto.getText());
+            
+            int res = ps.executeUpdate();
+            
+            if(res > 0){
+                JOptionPane.showMessageDialog(null, "Retiro exitoso");               
+            }  else{
+                JOptionPane.showMessageDialog(null, "Error al Retirar");
+            }      
+            
+            jtfMonto.setText("");
+            
+            con.close();
+        } catch(Exception e){
+          System.err.println(e);
+        }
+    }   
+
+
+
+codificacion saldo
+
+import com.mysql.jdbc.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+   public SaldoJFrame() {
+        initComponents();
+        
+        Connection con;
+        Conexion conn = new Conexion();
+        
+        try{
+            con = conn.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT saldo FROM cuenta WHERE id=1");
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                jtfSaldo.setText(rs.getString("Saldo"));
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error" + e);       
+        }      
+    }
+   
+codificacion boton de cerrar saldo
+
+
+  private void jtbnCerrarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        this.dispose();      
+    }  
