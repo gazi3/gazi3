@@ -1,0 +1,232 @@
+INDEX.HTML
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura de Datos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+   <div class="dive">
+        <h1>Captura de Datos Personales</h1>
+        <br>
+        <h2>Ingresa los Datos que se te piden</h2>
+        <br>
+        <p>Mi Primera Encuesta</p>
+        <hr>
+        <form action="resultados.php" method="post">
+                <label for="name">nombre</label>
+                <input type="text" name="name" id="name" value="Ingresa tu Nombre">
+                <br>
+                <label for="edad">Edad</label>
+                <input type="number" name="Age" id="Age" value="Ingresa tu Edad">
+                <br>
+                <label for="City">Ciudad</label>
+                <input type="text" name="City" id="City" value="Ingresa tu Ciudad">
+                <br>
+                <label for="Birthdate">Fecha de Nacimiento:</label>
+                <input type="date" name="Birthdate" id="Birthdate">
+                <br>
+                <label for="Hobby">Pasatiempo</label>
+                <input type="text" name="Hobby" id="Hobby" value="Ingresa tu Hobby">
+                <hr>  
+                <button type="submit">¡Ingresamos Datos!</button>
+        </form>
+   </div>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+RESULADOS.PHP
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Datos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+   <div class="dive2">
+    <h1>Resultados</h1>
+    <center>
+        <img src="img/Totoro.jpg" alt="Totoro">
+        <br>
+        <?php
+        $nombre = $_POST['name'];
+           echo '<p><b>Nombre:</b> '.$nombre.'</p>';
+
+           $edad= $_POST['Age'];
+           echo '<p><b>Edad:</b> '.$edad.'</p>';
+
+           $ciudad = $_POST['City'];
+           echo '<p><b>Ciudad:</b> '.$ciudad.'</p>';
+
+           $fecha_nac = $_POST['Birthdate'];
+           echo '<p><b>Fecha de Nacimiento:</b> '.$fecha_nac.'</p>';
+
+           $pasatiempo = $_POST['Hobby'];
+           echo '<p><b>pasatiempo:</b> '.$pasatiempo.'</p>';
+        ?>
+    </center>
+    <h2>¡Bien Hecho!</h2>
+    <div id="popUpOverlay"></div>
+          <div id="popUpBox">
+          <div id="box">
+                 <i class="fas fa=question=circle fa-5x"></i>
+                   <h1>¿volder a ingresar datos?</h1>
+            <div id="closeModal"></div>
+        </div>
+        <button onclick="Alert.reder('You look very pretty today.')" class="btn">¡volver a ingresar!</button>
+        <script src=".js/app2.js"></script>
+    </center>
+   </div>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+APP.JS
+var Alert = new CustomAlert();
+
+function CustomAlert(){
+    this.render = function(){
+    //Show Modal//
+    let popUpBox = document.getElementById('popUpBox');
+    popUpBox.style.display = "block";
+    //Close Modal//
+    document.getElementById('closeModal').innerHTML = '<a href="index.html"><button type="button" a href>¡Si quiero!</button></a>';
+    }
+    this.ok = function(){
+        document.getElementById('popUpBox').style.display = "none";
+        document.getElementById('popUpOverlay').style.display = "none";
+    }
+      
+}
+--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
+STYLE.CSS
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: rgb(12, 9, 41);
+    padding-bottom: 5rem;
+  }
+  
+  h1,
+  h2 {
+    color: black;
+    padding: 0rem 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Arial", cursive;
+    letter-spacing: 1px;
+  }
+
+  p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.4px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+  }
+
+  label {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3.2pt;
+    word-spacing: 3.8pt;
+    color: black;
+  }
+  input[type="date"] {
+    height: 38px;
+    padding: 6px 10px;
+    background-color: #fff;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    padding-top: 2rem 0;
+    background-color:#59c4eb;
+    border-radius:8px;
+    display:inline-block;
+    cursor:pointer;
+    color:black;
+    font-family:Arial;
+    font-size:20px;
+    padding:13px 32px;
+  }
+
+  input {
+    height: 38px;
+    padding: 6px 10px;
+    background-color: #fff;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+  
+  button{
+      background-color:#59c4eb;
+      border-radius:8px;
+      display:inline-block;
+      cursor:pointer;
+      color:black;
+      font-family:Arial;
+      font-size:20px;
+      padding:13px 32px;
+  }
+  
+  .dive {
+    height:580px;
+    width: 800px;
+    border: 5px solid #FFFFFF;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 2rem;
+    margin-left: 19rem;
+  }
+
+  .dive2 {
+    height:580px;
+    width: 800px;
+    border: 5px solid #FFFFFF;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 2rem;
+    margin-left: 19rem;
+  }
+    
+  #popUpBox{
+    width: 500px;
+    overflow: hidden;
+    background: rgb(255, 243, 243);
+    border-color: black;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+  }
+
+
+
+
+
+
